@@ -1,11 +1,16 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class PlayerMove : CharacterBody3D
 {
+    [Export] public Camera3D playerCamera;
+    [Export] public RayCast3D rayCast;
     Vector2 movementAxis = Vector2.Zero;
     float velocityY = 0f;
     bool sprinting = false;
+    Vector3 from = Vector3.Zero;
+    Vector3 to = Vector3.Zero;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -16,12 +21,12 @@ public partial class PlayerMove : CharacterBody3D
     {
         movementAxis = Input.GetVector("left", "right", "forward", "backward");
         sprinting = Input.IsActionPressed("sprint");
-        movementAxis *= sprinting ? (float)delta * 1500 : (float)delta * 500;
+        movementAxis *= sprinting ? (float)delta * 1500 : (float)delta * 800;
         if (IsOnFloor())
         {
             if (Input.GetActionStrength("jump") > 0)
             {
-                velocityY = 10f;
+                velocityY = 4f;
             }
         }
         else
@@ -33,5 +38,11 @@ public partial class PlayerMove : CharacterBody3D
         MoveAndSlide();
         //GD.Print("input: " + movementAxis);
         //GD.Print("position: " + GlobalPosition);
+
+        if (Input.IsActionJustReleased("shoot"))
+        {
+            var col = rayCast.GetCollider();
+            col?.EmitSignal("take_damage", 0.1f);
+        }
     }
 }

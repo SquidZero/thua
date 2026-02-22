@@ -21,7 +21,7 @@ public partial class PlayerMove : CharacterBody3D
 	{
 		movementAxis = Input.GetVector("left", "right", "forward", "backward");
 		sprinting = Input.IsActionPressed("sprint");
-		movementAxis *= sprinting ? (float)delta * 1500 : (float)delta * 800;
+		movementAxis *= sprinting ? (float)delta * 750 : (float)delta * 250;
 		if (IsOnFloor())
 		{
 			if (Input.GetActionStrength("jump") > 0)

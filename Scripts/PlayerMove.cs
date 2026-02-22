@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using System.Linq;
-// Test 2026-02-21 @ 21-20 EST
+
 public partial class PlayerMove : CharacterBody3D
 {
 	[Export] public Camera3D playerCamera;

@@ -4,10 +4,14 @@
 [ext_resource type="Script" uid="uid://calk6usat5udl" path="res://Scripts/CameraLook.cs" id="2_ykvvg"]
 [ext_resource type="Material" path="res://placeholdermaterial.tres" id="3_2rfw7"]
 [ext_resource type="Script" uid="uid://cks8lfspjo7cy" path="res://Scripts/Enemy/Enemy.cs" id="3_bwqk1"]
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_7r35v"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="6_1h1pd"]
 [ext_resource type="Material" path="res://stonebricks.tres" id="7_1h1pd"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="7_x4i3u"]
+=======
+[ext_resource type="Texture2D" uid="uid://lny254mjhcpn" path="res://crosshair.png" id="3_fp5cc"]
+>>>>>>> 57f7340887bba2d503141119ce761f6c89789385
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bdxqu"]
 
@@ -25,11 +29,9 @@ size = Vector2(100, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fp5cc"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r35v"]
-albedo_texture = ExtResource("7_x4i3u")
-metallic_specular = 0.0
-texture_filter = 2
+[node name="Node3D" type="Node3D" unique_id=2103739138]
 
+<<<<<<< HEAD
 [sub_resource type="ArrayMesh" id="ArrayMesh_1h1pd"]
 _surfaces = [{
 "aabb": AABB(-32, -0.5, -28.5, 64.5, 17.5, 70.5),
@@ -44,10 +46,27 @@ _surfaces = [{
 "vertex_count": 360,
 "vertex_data": PackedByteArray("AAACQgAAAD8AAOTBAAAAwgAAAD8AAOTBAAAAwgAAAL8AAOTBAAACQgAAAL8AAOTBAAAAwgAAAL8AAChCAAAAwgAAAL8AAOTBAAAAwgAAAD8AAOTBAAAAwgAAAD8AAChCAAAAwgAAAL8AAChCAAACQgAAAL8AAChCAAACQgAAAL8AAOTBAAAAwgAAAL8AAOTBAAAAwgAAAD8AAChCAAAAwgAAAD8AAOTBAAACQgAAAD8AAOTBAAACQgAAAD8AAChCAAACQgAAAD8AAChCAAACQgAAAD8AAOTBAAACQgAAAL8AAOTBAAACQgAAAL8AAChCAAACQgAAAL8AAChCAAAAwgAAAL8AAChCAAAAwgAAAD8AAChCAAACQgAAAD8AAChCAAAAQAAAiEEAANDAAABgwAAAiEEAANDAAABgwAAAAD8AANDAAAAAQAAAAD8AANDAAABgwAAAAD8AAEBAAABgwAAAAD8AANDAAABgwAAAiEEAANDAAABgwAAAiEEAAEBAAABgwAAAAD8AAEBAAAAAQAAAAD8AAEBAAAAAQAAAAD8AANDAAABgwAAAAD8AANDAAABgwAAAiEEAAEBAAABgwAAAiEEAANDAAAAAQAAAiEEAANDAAAAAQAAAiEEAAEBAAAAAQAAAiEEAAEBAAAAAQAAAiEEAANDAAAAAQAAAAD8AANDAAAAAQAAAAD8AAEBAAAAAQAAAAD8AAEBAAABgwAAAAD8AAEBAAABgwAAAiEEAAEBAAAAAQAAAiEEAAEBAAABgwAAAgD8AANDAAACIwQAAgD8AANDAAACIwQAAAD8AANDAAABgwAAAAD8AANDAAACIwQAAAD8AAEBAAACIwQAAAD8AANDAAACIwQAAgD8AANDAAACIwQAAgD8AAEBAAACIwQAAAD8AAEBAAABgwAAAAD8AAEBAAABgwAAAAD8AANDAAACIwQAAAD8AANDAAACIwQAAgD8AAEBAAACIwQAAgD8AANDAAABgwAAAgD8AANDAAABgwAAAgD8AAEBAAABgwAAAgD8AAEBAAABgwAAAgD8AANDAAABgwAAAAD8AANDAAABgwAAAAD8AAEBAAABgwAAAAD8AAEBAAACIwQAAAD8AAEBAAACIwQAAgD8AAEBAAABgwAAAgD8AAEBAAABgwAAAwD8AANDAAACAwQAAwD8AANDAAACAwQAAgD8AANDAAABgwAAAgD8AANDAAACAwQAAgD8AAEBAAACAwQAAgD8AANDAAACAwQAAwD8AANDAAACAwQAAwD8AAEBAAACAwQAAgD8AAEBAAABgwAAAgD8AAEBAAABgwAAAgD8AANDAAACAwQAAgD8AANDAAACAwQAAwD8AAEBAAACAwQAAwD8AANDAAABgwAAAwD8AANDAAABgwAAAwD8AAEBAAABgwAAAwD8AAEBAAABgwAAAwD8AANDAAABgwAAAgD8AANDAAABgwAAAgD8AAEBAAABgwAAAgD8AAEBAAACAwQAAgD8AAEBAAACAwQAAwD8AAEBAAABgwAAAwD8AAEBAAABgwAAAAEAAANDAAABwwQAAAEAAANDAAABwwQAAwD8AANDAAABgwAAAwD8AANDAAABwwQAAwD8AAEBAAABwwQAAwD8AANDAAABwwQAAAEAAANDAAABwwQAAAEAAAEBAAABwwQAAwD8AAEBAAABgwAAAwD8AAEBAAABgwAAAwD8AANDAAABwwQAAwD8AANDAAABwwQAAAEAAAEBAAABwwQAAAEAAANDAAABgwAAAAEAAANDAAABgwAAAAEAAAEBAAABgwAAAAEAAAEBAAABgwAAAAEAAANDAAABgwAAAwD8AANDAAABgwAAAwD8AAEBAAABgwAAAwD8AAEBAAABwwQAAwD8AAEBAAABwwQAAAEAAAEBAAABgwAAAAEAAAEBAAABgwAAAIEAAANDAAABgwQAAIEAAANDAAABgwQAAAEAAANDAAABgwAAAAEAAANDAAABgwQAAAEAAAEBAAABgwQAAAEAAANDAAABgwQAAIEAAANDAAABgwQAAIEAAAEBAAABgwQAAAEAAAEBAAABgwAAAAEAAAEBAAABgwAAAAEAAANDAAABgwQAAAEAAANDAAABgwQAAIEAAAEBAAABgwQAAIEAAANDAAABgwAAAIEAAANDAAABgwAAAIEAAAEBAAABgwAAAIEAAAEBAAABgwAAAIEAAANDAAABgwAAAAEAAANDAAABgwAAAAEAAAEBAAABgwAAAAEAAAEBAAABgwQAAAEAAAEBAAABgwQAAIEAAAEBAAABgwAAAIEAAAEBAAABgwAAAQEAAANDAAABQwQAAQEAAANDAAABQwQAAIEAAANDAAABgwAAAIEAAANDAAABQwQAAIEAAAEBAAABQwQAAIEAAANDAAABQwQAAQEAAANDAAABQwQAAQEAAAEBAAABQwQAAIEAAAEBAAABgwAAAIEAAAEBAAABgwAAAIEAAANDAAABQwQAAIEAAANDAAABQwQAAQEAAAEBAAABQwQAAQEAAANDAAABgwAAAQEAAANDAAABgwAAAQEAAAEBAAABgwAAAQEAAAEBAAABgwAAAQEAAANDAAABgwAAAIEAAANDAAABgwAAAIEAAAEBAAABgwAAAIEAAAEBAAABQwQAAIEAAAEBAAABQwQAAQEAAAEBAAABgwAAAQEAAAEBAAABgwAAAYEAAANDAAABAwQAAYEAAANDAAABAwQAAQEAAANDAAABgwAAAQEAAANDAAABAwQAAQEAAAEBAAABAwQAAQEAAANDAAABAwQAAYEAAANDAAABAwQAAYEAAAEBAAABAwQAAQEAAAEBAAABgwAAAQEAAAEBAAABgwAAAQEAAANDAAABAwQAAQEAAANDAAABAwQAAYEAAAEBAAABAwQAAYEAAANDAAABgwAAAYEAAANDAAABgwAAAYEAAAEBAAABgwAAAYEAAAEBAAABgwAAAYEAAANDAAABgwAAAQEAAANDAAABgwAAAQEAAAEBAAABgwAAAQEAAAEBAAABAwQAAQEAAAEBAAABAwQAAYEAAAEBAAABgwAAAYEAAAEBAAABgwAAAgEAAANDAAAAwwQAAgEAAANDAAAAwwQAAYEAAANDAAABgwAAAYEAAANDAAAAwwQAAYEAAAEBAAAAwwQAAYEAAANDAAAAwwQAAgEAAANDAAAAwwQAAgEAAAEBAAAAwwQAAYEAAAEBAAABgwAAAYEAAAEBAAABgwAAAYEAAANDAAAAwwQAAYEAAANDAAAAwwQAAgEAAAEBAAAAwwQAAgEAAANDAAABgwAAAgEAAANDAAABgwAAAgEAAAEBAAABgwAAAgEAAAEBAAABgwAAAgEAAANDAAABgwAAAYEAAANDAAABgwAAAYEAAAEBAAABgwAAAYEAAAEBAAAAwwQAAYEAAAEBAAAAwwQAAgEAAAEBAAABgwAAAgEAAAEBAAABgwAAAkEAAANDAAAAgwQAAkEAAANDAAAAgwQAAgEAAANDAAABgwAAAgEAAANDAAAAgwQAAgEAAAEBAAAAgwQAAgEAAANDAAAAgwQAAkEAAANDAAAAgwQAAkEAAAEBAAAAgwQAAgEAAAEBAAABgwAAAgEAAAEBAAABgwAAAgEAAANDAAAAgwQAAgEAAANDAAAAgwQAAkEAAAEBAAAAgwQAAkEAAANDAAABgwAAAkEAAANDAAABgwAAAkEAAAEBAAABgwAAAkEAAAEBAAABgwAAAkEAAANDAAABgwAAAgEAAANDAAABgwAAAgEAAAEBAAABgwAAAgEAAAEBAAAAgwQAAgEAAAEBAAAAgwQAAkEAAAEBAAABgwAAAkEAAAEBAAABgwAAAoEAAANDAAAAQwQAAoEAAANDAAAAQwQAAkEAAANDAAABgwAAAkEAAANDAAAAQwQAAkEAAAEBAAAAQwQAAkEAAANDAAAAQwQAAoEAAANDAAAAQwQAAoEAAAEBAAAAQwQAAkEAAAEBAAABgwAAAkEAAAEBAAABgwAAAkEAAANDAAAAQwQAAkEAAANDAAAAQwQAAoEAAAEBAAAAQwQAAoEAAANDAAABgwAAAoEAAANDAAABgwAAAoEAAAEBAAABgwAAAoEAAAEBAAABgwAAAoEAAANDAAABgwAAAkEAAANDAAABgwAAAkEAAAEBAAABgwAAAkEAAAEBAAAAQwQAAkEAAAEBAAAAQwQAAoEAAAEBAAABgwAAAoEAAAEBAAABgwAAAsEAAANDAAAAAwQAAsEAAANDAAAAAwQAAoEAAANDAAABgwAAAoEAAANDAAAAAwQAAoEAAAEBAAAAAwQAAoEAAANDAAAAAwQAAsEAAANDAAAAAwQAAsEAAAEBAAAAAwQAAoEAAAEBAAABgwAAAoEAAAEBAAABgwAAAoEAAANDAAAAAwQAAoEAAANDAAAAAwQAAsEAAAEBAAAAAwQAAsEAAANDAAABgwAAAsEAAANDAAABgwAAAsEAAAEBAAABgwAAAsEAAAEBAAABgwAAAsEAAANDAAABgwAAAoEAAANDAAABgwAAAoEAAAEBAAABgwAAAoEAAAEBAAAAAwQAAoEAAAEBAAAAAwQAAsEAAAEBAAABgwAAAsEAAAEBAAABgwAAAwEAAANDAAADgwAAAwEAAANDAAADgwAAAsEAAANDAAABgwAAAsEAAANDAAADgwAAAsEAAAEBAAADgwAAAsEAAANDAAADgwAAAwEAAANDAAADgwAAAwEAAAEBAAADgwAAAsEAAAEBAAABgwAAAsEAAAEBAAABgwAAAsEAAANDAAADgwAAAsEAAANDAAADgwAAAwEAAAEBAAADgwAAAwEAAANDAAABgwAAAwEAAANDAAABgwAAAwEAAAEBAAABgwAAAwEAAAEBAAABgwAAAwEAAANDAAABgwAAAsEAAANDAAABgwAAAsEAAAEBAAABgwAAAsEAAAEBAAADgwAAAsEAAAEBAAADgwAAAwEAAAEBAAABgwAAAwEAAAEBAAABgwAAA0EAAANDAAADAwAAA0EAAANDAAADAwAAAwEAAANDAAABgwAAAwEAAANDAAADAwAAAwEAAAEBAAADAwAAAwEAAANDAAADAwAAA0EAAANDAAADAwAAA0EAAAEBAAADAwAAAwEAAAEBAAABgwAAAwEAAAEBAAABgwAAAwEAAANDAAADAwAAAwEAAANDAAADAwAAA0EAAAEBAAADAwAAA0EAAANDAAABgwAAA0EAAANDAAABgwAAA0EAAAEBAAABgwAAA0EAAAEBAAABgwAAA0EAAANDAAABgwAAAwEAAANDAAABgwAAAwEAAAEBAAABgwAAAwEAAAEBAAADAwAAAwEAAAEBAAADAwAAA0EAAAEBAAABgwAAA0EAAAEBAAABgwAAA4EAAANDAAACgwAAA4EAAANDAAACgwAAA0EAAANDAAABgwAAA0EAAANDAAACgwAAA0EAAAEBAAACgwAAA0EAAANDAAACgwAAA4EAAANDAAACgwAAA4EAAAEBAAACgwAAA0EAAAEBAAABgwAAA0EAAAEBAAABgwAAA0EAAANDAAACgwAAA0EAAANDAAACgwAAA4EAAAEBAAACgwAAA4EAAANDAAABgwAAA4EAAANDAAABgwAAA4EAAAEBAAABgwAAA4EAAAEBAAABgwAAA4EAAANDAAABgwAAA0EAAANDAAABgwAAA0EAAAEBAAABgwAAA0EAAAEBAAACgwAAA0EAAAEBAAACgwAAA4EAAAEBAAABgwAAA4EAAAEBA/////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+//////wAA/7//////AAD/v/////8AAP+//////wAA/78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//v/9/AAD//////38AAP//////fwAA//////9/AAD//////3////9//7//f////3//v/9/////f/+//3////9//7////9//////////3//////////f/////////9///////9//3////+//3//f////7//f/9/////v/9//3////+/")
 }]
+=======
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=768210720]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1103.0
+offset_top = -648.0
+offset_right = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+>>>>>>> 57f7340887bba2d503141119ce761f6c89789385
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x4i3u"]
-points = PackedVector3Array(32.5, 0.5, 42, 32.5, -0.5, 42, -32, 0.5, 42, -32, -0.5, 42, 32.5, 0.5, -28.5, 32.5, -0.5, -28.5, -32, 0.5, -28.5, -32, -0.5, -28.5)
+[node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=521127535]
+layout_mode = 2
+texture = ExtResource("3_fp5cc")
+stretch_mode = 4
 
+<<<<<<< HEAD
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vrkw4"]
 points = PackedVector3Array(2, 17, 3, 2, 0.5, 3, -3.5, 17, 3, -3.5, 0.5, 3, 2, 17, -6.5, 2, 0.5, -6.5, -3.5, 17, -6.5, -3.5, 0.5, -6.5)
 
@@ -93,59 +112,63 @@ points = PackedVector3Array(-3.5, 7, 3, -3.5, 6.5, 3, -5, 7, 3, -5, 6.5, 3, -3.5
 [node name="Node3D" type="Node3D" unique_id=1093397743]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=301898016 node_paths=PackedStringArray("playerCamera", "rayCast")]
+=======
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=2103509013 node_paths=PackedStringArray("playerCamera", "rayCast")]
+>>>>>>> 57f7340887bba2d503141119ce761f6c89789385
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0208123, 0)
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_pvqqe")
 playerCamera = NodePath("Camera3D")
 rayCast = NodePath("Camera3D/RayCast3D")
+jumpHeight = 8.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=738450279]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=998339945]
 shape = SubResource("CapsuleShape3D_bdxqu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1098632869]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=609150762]
 mesh = SubResource("CapsuleMesh_jjve1")
 skeleton = NodePath("")
 
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=2139619240]
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=771703213]
+
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 current = true
 near = 0.001
 script = ExtResource("2_ykvvg")
 
-[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/Camera3D" unique_id=1077457510]
+[node name="Gun" type="MeshInstance3D" parent="CharacterBody3D/Camera3D" unique_id=1579200548]
+transform = Transform3D(0.2, 0, 0, 0, -1.4060181e-08, -0.2, 0, 0.32165942, -8.742278e-09, 0.4086511, -0.2616694, -0.42132673)
+mesh = SubResource("CylinderMesh_ykvvg")
+skeleton = NodePath("../..")
+
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/Camera3D" unique_id=273450040]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, -0.5014111)
 target_position = Vector3(0, -9.223372e+18, 0)
 
-[node name="Gun" type="MeshInstance3D" parent="CharacterBody3D" unique_id=479955884]
-transform = Transform3D(0.2, 0, 0, 0, -1.4060181e-08, -0.2, 0, 0.32165942, -8.742278e-09, 0.4086511, 0.2383306, -0.42132673)
-mesh = SubResource("CylinderMesh_ykvvg")
+[node name="Ground" type="Marker3D" parent="." unique_id=1361125466]
 
-[node name="Ground" type="Marker3D" parent="." unique_id=1041170959]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 104.6489)
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=1765209823]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=1526237059]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=529366622]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=926380537]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.026733398, 0)
 shape = SubResource("BoxShape3D_axxhv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=403631706]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16871643, 3.8146973e-06, -0.11103821)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1497249694]
 material_override = ExtResource("3_2rfw7")
 mesh = SubResource("PlaneMesh_3ufgr")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=850457822]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1221700365]
 transform = Transform3D(1, 0, 0, 0, 0.6655821, 0.7463246, 0, -0.7463246, 0.6655821, 0, 41.91105, 0)
 
-[node name="Enemy" type="CharacterBody3D" parent="." unique_id=2128198824]
+[node name="Enemy" type="CharacterBody3D" parent="." unique_id=2144662892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6308448, -4.339488)
 script = ExtResource("3_bwqk1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=834833672]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=980050645]
 shape = SubResource("BoxShape3D_2rfw7")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1880474696]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=692435334]
 mesh = SubResource("BoxMesh_fp5cc")
 skeleton = NodePath("")
 

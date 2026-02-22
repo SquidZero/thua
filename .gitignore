@@ -16,6 +16,9 @@ export_credentials.cfg
 # Visual Studio ignore
 .vs/
 
+# MacOS auto generated files
+.DS_Store
+
 # Mono-specific ignores
 .mono/
 data_*/

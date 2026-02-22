@@ -3,10 +3,15 @@
 [ext_resource type="Script" uid="uid://cee1wuq2ck5xl" path="res://Scripts/PlayerMove.cs" id="1_kpjcp"]
 [ext_resource type="Script" uid="uid://b5inp6kgabhum" path="res://Scripts/CameraLook.cs" id="2_kne1u"]
 [ext_resource type="ArrayMesh" uid="uid://bwxpmlgciyka" path="res://galaxii/THUA_RIFLE.obj" id="3_kne1u"]
+[ext_resource type="Shader" uid="uid://o3d5evvatq4u" path="res://galaxii/THUA_RIFLE.gdshader" id="4_e80uo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bdxqu"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_jjve1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e80uo"]
+render_priority = 0
+shader = ExtResource("4_e80uo")
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=402742391 node_paths=PackedStringArray("playerCamera", "rayCast")]
 axis_lock_angular_x = true
@@ -31,6 +36,7 @@ script = ExtResource("2_kne1u")
 
 [node name="Gun" type="MeshInstance3D" parent="Camera3D" unique_id=1068649233]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.28794274, -0.22743714, -0.62183386)
+material_override = SubResource("ShaderMaterial_e80uo")
 mesh = ExtResource("3_kne1u")
 skeleton = NodePath("../..")
 

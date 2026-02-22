@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cee1wuq2ck5xl" path="res://Scripts/PlayerMove.cs" id="1_pvqqe"]
 [ext_resource type="Script" uid="uid://calk6usat5udl" path="res://Scripts/CameraLook.cs" id="2_ykvvg"]
+<<<<<<< HEAD
 [ext_resource type="Material" path="res://Untitled.tres" id="3_2rfw7"]
+=======
+[ext_resource type="Material" path="res://placeholdermaterial.tres" id="3_2rfw7"]
+>>>>>>> 2be76989eaa408b4bb6189e849ff31b253db269a
 [ext_resource type="Script" uid="uid://cks8lfspjo7cy" path="res://Scripts/Enemy/Enemy.cs" id="3_bwqk1"]
 [ext_resource type="Texture2D" uid="uid://lny254mjhcpn" path="res://crosshair.png" id="3_fp5cc"]
 
@@ -22,6 +26,7 @@ size = Vector2(100, 100)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fp5cc"]
 
+<<<<<<< HEAD
 [node name="Node3D" type="Node3D" unique_id=2103739138]
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=768210720]
@@ -43,6 +48,11 @@ texture = ExtResource("3_fp5cc")
 stretch_mode = 4
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=2103509013 node_paths=PackedStringArray("playerCamera", "rayCast")]
+=======
+[node name="Node3D" type="Node3D" unique_id=1093397743]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=301898016 node_paths=PackedStringArray("playerCamera", "rayCast")]
+>>>>>>> 2be76989eaa408b4bb6189e849ff31b253db269a
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0208123, 0)
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -51,6 +61,7 @@ playerCamera = NodePath("Camera3D")
 rayCast = NodePath("Camera3D/RayCast3D")
 jumpHeight = 8.0
 
+<<<<<<< HEAD
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=998339945]
 shape = SubResource("CapsuleShape3D_bdxqu")
 
@@ -59,11 +70,22 @@ mesh = SubResource("CapsuleMesh_jjve1")
 skeleton = NodePath("")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=771703213]
+=======
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=738450279]
+shape = SubResource("CapsuleShape3D_bdxqu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1098632869]
+mesh = SubResource("CapsuleMesh_jjve1")
+skeleton = NodePath("")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=2139619240]
+>>>>>>> 2be76989eaa408b4bb6189e849ff31b253db269a
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 current = true
 near = 0.001
 script = ExtResource("2_ykvvg")
 
+<<<<<<< HEAD
 [node name="Gun" type="MeshInstance3D" parent="CharacterBody3D/Camera3D" unique_id=1579200548]
 transform = Transform3D(0.2, 0, 0, 0, -1.4060181e-08, -0.2, 0, 0.32165942, -8.742278e-09, 0.4086511, -0.2616694, -0.42132673)
 mesh = SubResource("CylinderMesh_ykvvg")
@@ -96,5 +118,38 @@ script = ExtResource("3_bwqk1")
 shape = SubResource("BoxShape3D_2rfw7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=692435334]
+=======
+[node name="RayCast3D" type="RayCast3D" parent="CharacterBody3D/Camera3D" unique_id=1077457510]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, -0.5014111)
+target_position = Vector3(0, -9.223372e+18, 0)
+
+[node name="Gun" type="MeshInstance3D" parent="CharacterBody3D" unique_id=479955884]
+transform = Transform3D(0.2, 0, 0, 0, -1.4060181e-08, -0.2, 0, 0.32165942, -8.742278e-09, 0.4086511, 0.2383306, -0.42132673)
+mesh = SubResource("CylinderMesh_ykvvg")
+
+[node name="Ground" type="Marker3D" parent="." unique_id=1041170959]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=1526237059]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=529366622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.026733398, 0)
+shape = SubResource("BoxShape3D_axxhv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=403631706]
+material_override = ExtResource("3_2rfw7")
+mesh = SubResource("PlaneMesh_3ufgr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=850457822]
+transform = Transform3D(1, 0, 0, 0, 0.6655821, 0.7463246, 0, -0.7463246, 0.6655821, 0, 41.91105, 0)
+
+[node name="Enemy" type="CharacterBody3D" parent="." unique_id=2128198824]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6308448, -4.339488)
+script = ExtResource("3_bwqk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy" unique_id=834833672]
+shape = SubResource("BoxShape3D_2rfw7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy" unique_id=1880474696]
+>>>>>>> 2be76989eaa408b4bb6189e849ff31b253db269a
 mesh = SubResource("BoxMesh_fp5cc")
 skeleton = NodePath("")

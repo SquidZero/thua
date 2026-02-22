@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cee1wuq2ck5xl" path="res://Scripts/PlayerMove.cs" id="1_pvqqe"]
 [ext_resource type="Script" uid="uid://calk6usat5udl" path="res://Scripts/CameraLook.cs" id="2_ykvvg"]
+[ext_resource type="Material" path="res://placeholdermaterial.tres" id="3_2rfw7"]
 [ext_resource type="Script" uid="uid://cks8lfspjo7cy" path="res://Scripts/Enemy/Enemy.cs" id="3_bwqk1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bdxqu"]
@@ -60,6 +61,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.026733398, 0)
 shape = SubResource("BoxShape3D_axxhv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=403631706]
+material_override = ExtResource("3_2rfw7")
 mesh = SubResource("PlaneMesh_3ufgr")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=850457822]

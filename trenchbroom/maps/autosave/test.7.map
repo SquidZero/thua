@@ -6,6 +6,7 @@
 "wad" ""
 "classname" "worldspawn"
 "_tb_textures" "textures"
+"_tb_def" "builtin:FuncGodot.fgd"
 // brush 0
 {
 ( -208 -112 48 ) ( -208 -512 48 ) ( -208 -512 32 ) __TB_empty [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 1 1

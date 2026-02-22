@@ -1,0 +1,4 @@
+@PointClass size(-16 -16 -32, 16 16 32) = test_enemy : "test enemy."
+[
+    health(integer) : "Health" : 1 : "start hp"
+]

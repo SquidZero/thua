@@ -26,7 +26,7 @@ public partial class PlayerMove : CharacterBody3D
 		{
 			if (Input.GetActionStrength("jump") > 0)
 			{
-				velocityY = 4f;
+				velocityY = 6f;
 			}
 		}
 		else

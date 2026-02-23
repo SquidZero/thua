@@ -25,16 +25,15 @@ public partial class PlayerMove : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		sprinting = Input.IsActionPressed("sprint"); //&& IsOnFloor();
-		var moving = Input.GetVector("left", "right", "forward", "backward");
-		if (moving[0] != 0 || moving[1] != 0) {
-			movementAxis = Input.GetVector("left", "right", "forward", "backward");
+		var movementInput = Input.GetVector("left", "right", "forward", "backward");
+		if (movementInput != Vector2.Zero) {
+			movementAxis = movementInput;
 			movementAxis *= sprinting || sprintJump ? (float)delta * 620 : (float)delta * 340;
 		}
 		else
 		{
 			movementAxis *= IsOnFloor() ? new Vector2(0.60f,0.60f) : new Vector2(0.89f,0.89f);
 		}
-		
 		if (IsOnFloor())
 		{
 			//sprintJump = sprinting;
@@ -46,6 +45,10 @@ public partial class PlayerMove : CharacterBody3D
 		else
 		{
 			velocityY += GetGravity().Y;
+		}
+		if (GlobalPosition[1] < -75.00f) {
+			GD.Print("You fell off the map, idiot");
+			GlobalPosition = Vector3.Zero;
 		}
 		//GD.Print("movementVec: " + movementVec);
 		Velocity = new Vector3(movementAxis.X, velocityY, movementAxis.Y).Rotated(

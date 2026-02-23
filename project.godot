@@ -77,3 +77,4 @@ shoot={
 [physics]
 
 3d/default_gravity=0.26899999999999835
+2d/default_gravity=1000.0

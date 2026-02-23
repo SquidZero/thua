@@ -18,16 +18,27 @@ public partial class PlayerMove : CharacterBody3D
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() { }
+	
+	public bool sprintJump = false;
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		movementAxis = Input.GetVector("left", "right", "forward", "backward");
-		sprinting = Input.IsActionPressed("sprint");
-		movementAxis *= sprinting ? (float)delta * 750 : (float)delta * 250;
+		sprinting = Input.IsActionPressed("sprint"); //&& IsOnFloor();
+		var moving = Input.GetVector("left", "right", "forward", "backward");
+		if (moving[0] != 0 || moving[1] != 0) {
+			movementAxis = Input.GetVector("left", "right", "forward", "backward");
+			movementAxis *= sprinting || sprintJump ? (float)delta * 620 : (float)delta * 340;
+		}
+		else
+		{
+			movementAxis *= IsOnFloor() ? new Vector2(0.60f,0.60f) : new Vector2(0.89f,0.89f);
+		}
+		
 		if (IsOnFloor())
 		{
-			if (Input.GetActionStrength("jump") > 0)
+			//sprintJump = sprinting;
+			if (Input.IsActionPressed("jump"))
 			{
 				velocityY = 6f;
 			}

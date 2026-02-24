@@ -4,7 +4,7 @@
 [ext_resource type="Material" path="res://placeholdermaterial.tres" id="3_2rfw7"]
 [ext_resource type="Script" uid="uid://cks8lfspjo7cy" path="res://Scripts/Enemy/Enemy.cs" id="3_bwqk1"]
 [ext_resource type="Texture2D" uid="uid://lny254mjhcpn" path="res://crosshair.png" id="3_fp5cc"]
-[ext_resource type="Script" uid="uid://cwu5cf7a0awcd" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_7r35v"]
+[ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_7r35v"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="6_1h1pd"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="7_x4i3u"]
 
@@ -231,6 +231,8 @@ stretch_mode = 4
 
 [node name="CharacterBody3D" parent="." unique_id=402742391 instance=ExtResource("2_2rfw7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0208123, 0)
+walkSpeed = 80.0
+runSpeed = 120.0
 
 [node name="Ground" type="Marker3D" parent="." unique_id=1361125466]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.35762, 0, 0)
@@ -266,7 +268,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.6033516, 0)
 script = ExtResource("5_7r35v")
 local_map_file = "uid://ci56wk6374kb4"
 map_settings = ExtResource("6_1h1pd")
-metadata/_custom_type_script = "uid://cwu5cf7a0awcd"
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap" unique_id=310910234]
 collision_mask = 0

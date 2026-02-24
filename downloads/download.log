@@ -1,0 +1,48 @@
+2026-02-23 20:30:47 - spotify_downloader - ERROR - Fatal error
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/site-packages/spotipy/oauth2.py", line 234, in _request_access_token
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://accounts.spotify.com/api/token
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.14/site-packages/main.py", line 237, in main
+    tracks = spotify_client.get_playlist_tracks(url)
+  File "/usr/lib/python3.14/site-packages/src/spotify_client.py", line 56, in get_playlist_tracks
+    results = self.sp.playlist_tracks(playlist_id)
+  File "/usr/lib/python3.14/site-packages/spotipy/client.py", line 708, in playlist_tracks
+    return self.playlist_items(playlist_id, fields, limit, offset,
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                               market, additional_types)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/site-packages/spotipy/client.py", line 732, in playlist_items
+    return self._get(
+           ~~~~~~~~~^
+        f"playlists/{plid}/tracks",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        additional_types=",".join(additional_types)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/usr/lib/python3.14/site-packages/spotipy/client.py", line 321, in _get
+    return self._internal_call("GET", url, payload, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/site-packages/spotipy/client.py", line 247, in _internal_call
+    headers = self._auth_headers()
+  File "/usr/lib/python3.14/site-packages/spotipy/client.py", line 238, in _auth_headers
+    token = self.auth_manager.get_access_token(as_dict=False)
+  File "/usr/lib/python3.14/site-packages/spotipy/oauth2.py", line 209, in get_access_token
+    token_info = self._request_access_token()
+  File "/usr/lib/python3.14/site-packages/spotipy/oauth2.py", line 238, in _request_access_token
+    self._handle_oauth_error(http_error)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.14/site-packages/spotipy/oauth2.py", line 119, in _handle_oauth_error
+    raise SpotifyOauthError(
+    ...<3 lines>...
+    )
+spotipy.exceptions.SpotifyOauthError: error: invalid_client, error_description: Invalid client

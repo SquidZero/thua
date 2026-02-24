@@ -1,0 +1,8 @@
+{
+  "download_folder": "downloads",
+  "preferred_format": "mp3",
+  "preferred_quality": "320",
+  "max_concurrent": 2,
+  "embed_metadata": true,
+  "embed_artwork": false
+}

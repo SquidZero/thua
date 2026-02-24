@@ -1,0 +1,31 @@
+spotify:
+  client_id: YOUR_SPOTIFY_CLIENT_ID
+  client_secret: YOUR_SPOTIFY_CLIENT_SECRET
+download:
+  output_dir: ./downloads
+  audio_format: mp3
+  audio_quality: '320'
+  max_concurrent: 3
+  skip_existing: true
+audio:
+  sample_rate: 48000
+  bitrate: 320
+  channels: 2
+metadata:
+  embed_metadata: true
+  embed_artwork: true
+  embed_lyrics: false
+organization:
+  organize_by_artist: true
+  folder_structure: '{artist}/{album}/{track_number} - {title}'
+  filename_format: '{track_number:02d} - {artist} - {title}'
+youtube:
+  search_query_format: '{artist} {title} audio'
+  max_results: 5
+  prefer_official: true
+  min_duration_match: 0.9
+  max_duration_match: 1.1
+logging:
+  level: INFO
+  file: ./downloads/download.log
+  console: true

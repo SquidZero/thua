@@ -10,6 +10,7 @@ public partial class PlayerMove : CharacterBody3D
 	[Export]
 	public RayCast3D rayCast;
 	Vector2 movementAxis = Vector2.Zero;
+	Vector3 boingVec = Vector3.Zero;
 	float velocityY = 0.0f;
 	bool sprinting = false;
 	Vector3 from = Vector3.Zero;
@@ -19,8 +20,10 @@ public partial class PlayerMove : CharacterBody3D
 	public override void _Ready() { }
 
 		
-	public float walkSpeed = 340;
-	public float runSpeed = 620;
+	float walkSpeed = 340;
+	float runSpeed = 620;
+	byte wallJumps = 0;
+
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
@@ -41,21 +44,38 @@ public partial class PlayerMove : CharacterBody3D
 			sprinting = false;
 		}
 		if (IsOnFloor())
-		{
-			if (Input.IsActionPressed("jump"))
+		{	
+			boingVec = Vector3.Zero;
+			wallJumps = 0;
+			if (Input.IsActionJustPressed("jump"))
 			{
-				velocityY = 6.0f;
+				boingVec.Y = 6.0f;
 			}
 		}
 		else
 		{
-			velocityY += GetGravity().Y;
+			if (IsOnWallOnly() && Input.IsActionJustPressed("jump") && wallJumps < 3)
+			{
+				wallJumps++;
+				
+				boingVec = GetWallNormal() * (float)delta * (sprinting ? 1000.0f : 700.0f);
+				boingVec.Y = 8.0f;
+			}
+			else
+			{
+				boingVec.X *= 0.95f;
+				boingVec.Z *= 0.95f;
+				boingVec.Y += GetGravity().Y;
+			}
 		}
+		
+
 		if (GlobalPosition[1] < -75.0f) {
 			GD.Print("You fell off the map, idiot");
 			GlobalPosition = Vector3.Zero;
 		}
-		Velocity = new Vector3(movementAxis.X, Math.Min(velocityY,100.0f), movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
+		Velocity = new Vector3(movementAxis.X, 0.0f, movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
+		Velocity += boingVec;
 		MoveAndSlide();
 
 		if (Input.IsActionJustReleased("shoot"))

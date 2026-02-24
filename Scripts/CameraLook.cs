@@ -1,5 +1,5 @@
-using System;
 using Godot;
+using System;
 
 public partial class CameraLook : Camera3D
 {

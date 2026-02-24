@@ -10,9 +10,19 @@ public partial class PlayerMove : CharacterBody3D
     public RayCast3D rayCast;
     Vector2 movementAxis = Vector2.Zero;
     float velocityY = 0f;
+
+    [Export]
+    float walkSpeed = 250f;
+
+    [Export]
+    float sprintingSpeed = 750f;
     bool sprinting = false;
     Vector3 from = Vector3.Zero;
     Vector3 to = Vector3.Zero;
+    Vector3 flooredVel = Vector3.Zero;
+
+    [Export]
+    float friction = 2f;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() { }
@@ -21,24 +31,37 @@ public partial class PlayerMove : CharacterBody3D
     public override void _PhysicsProcess(double delta)
     {
         movementAxis = Input.GetVector("left", "right", "forward", "backward");
-        sprinting = Input.IsActionPressed("sprint");
-        movementAxis *= sprinting ? (float)delta * 750 : (float)delta * 250;
-        if (IsOnFloor())
+        sprinting = Input.IsActionPressed("sprint") && IsOnFloor();
+        movementAxis *= sprinting ? (float)delta * sprintingSpeed : (float)delta * walkSpeed;
+        if (!IsOnFloor())
         {
+            velocityY += GetGravity().Y;
+            //Velocity = new Vector3(Velocity.X, Velocity.Y, Velocity.Z);
+            Velocity =
+                flooredVel
+                + new Vector3(movementAxis.X, velocityY - Velocity.Y, movementAxis.Y).Rotated(
+                    Vector3.Up,
+                    Rotation.Y
+                );
+            Velocity /= friction;
+        }
+        else
+        {
+            //if (Velocity > flooredVel && IsOnFloor() && sprinting)
+            flooredVel = Velocity;
             if (Input.GetActionStrength("jump") > 0)
             {
                 velocityY = 6f;
             }
+            Velocity += new Vector3(movementAxis.X, velocityY - Velocity.Y, movementAxis.Y).Rotated(
+                Vector3.Up,
+                Rotation.Y
+            );
+            Velocity /= friction;
         }
-        else
-        {
-            velocityY += GetGravity().Y;
-        }
+
         //GD.Print("movementVec: " + movementVec);
-        Velocity = new Vector3(movementAxis.X, velocityY, movementAxis.Y).Rotated(
-            Vector3.Up,
-            Rotation.Y
-        );
+
         MoveAndSlide();
         //GD.Print("input: " + movementAxis);
         //GD.Print("position: " + GlobalPosition);

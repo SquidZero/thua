@@ -11,8 +11,10 @@ public partial class PlayerMove : CharacterBody3D
 	public RayCast3D rayCast;
 	Vector2 movementAxis = Vector2.Zero;
 	Vector3 boingVec = Vector3.Zero;
-	float velocityY = 0.0f;
+	Vector3 slideVec = Vector3.Zero;
+	float slideAng = 0;
 	bool sprinting = false;
+	public bool sliding = false;
 	Vector3 from = Vector3.Zero;
 	Vector3 to = Vector3.Zero;
 
@@ -29,8 +31,8 @@ public partial class PlayerMove : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		var movementInput = Input.GetVector("left", "right", "forward", "backward");
-
-		if (movementInput != Vector2.Zero) {
+		var frictionFactor =  IsOnFloor() ? 0.67f : 0.98f;
+        if (movementInput != Vector2.Zero) {
 			sprinting = Input.IsActionPressed("sprint");
 			var moveStep = (sprinting ? runSpeed : walkSpeed) * (float)delta;
 			movementAxis = new Vector2(
@@ -40,13 +42,19 @@ public partial class PlayerMove : CharacterBody3D
 		}
 		else
 		{
-			movementAxis *= IsOnFloor() ? 0.67f : 0.98f;
+			movementAxis *= frictionFactor;
 			sprinting = false;
 		}
 		if (IsOnFloor())
 		{	
 			boingVec = Vector3.Zero;
 			wallJumps = 0;
+			if (Input.IsActionJustPressed("slide")) {
+				sliding = true;
+				slideVec = movementInput != Vector2.Zero ? new Vector3(movementInput.X, 0.0f, movementInput.Y) : new Vector3(0.0f, 0.0f, -1.0f);
+				slideVec *= (float)delta * 860.0f;
+				slideAng = Rotation.Y;
+			}
 			if (Input.IsActionJustPressed("jump"))
 			{
 				boingVec.Y = 6.0f;
@@ -74,8 +82,23 @@ public partial class PlayerMove : CharacterBody3D
 			GD.Print("You fell off the map, idiot");
 			GlobalPosition = Vector3.Zero;
 		}
-		Velocity = new Vector3(movementAxis.X, 0.0f, movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
-		Velocity += boingVec;
+
+        if (sliding && IsOnFloor() && Input.IsActionPressed("slide") && !Input.IsActionJustPressed("jump"))
+        {
+            Velocity = new Vector3(slideVec.X, boingVec.Y, slideVec.Z).Rotated(Vector3.Up, slideAng);
+        }
+        else
+        {
+			if (sliding && Input.IsActionJustPressed("jump")) {
+				boingVec.Y = 7.0f;
+				slideVec *= 1.8f;
+			}
+            sliding = false;
+			slideVec *= frictionFactor;
+            Velocity = new Vector3(movementAxis.X, 0.0f, movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
+            Velocity += boingVec;
+			Velocity += new Vector3(slideVec.X, 0.0f, slideVec.Z).Rotated(Vector3.Up, slideAng);
+        }
 		MoveAndSlide();
 
 		if (Input.IsActionJustReleased("shoot"))

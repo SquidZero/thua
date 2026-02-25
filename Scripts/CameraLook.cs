@@ -16,11 +16,11 @@ public partial class CameraLook : Camera3D
 	public override void _Process(double delta)
 	{
 		if ((bool)GetParent().Get("sliding")) {
-			Position = new Vector3(Position.X, Math.Max(Position.Y-(float)delta*60,-0.6f), Position.Z);
+			Position = new Vector3(Position.X, Math.Max(Position.Y-(float)delta*40,-0.6f), Position.Z);
 		}
 		else
 		{
-			Position = new Vector3(Position.X, Math.Min(Position.Y+(float)delta*60,startPos.Y), Position.Z);
+			Position = new Vector3(Position.X, Math.Min(Position.Y+(float)delta*40,startPos.Y), Position.Z);
 		}
 		if (
 			(RotationDegrees.X + mouseDelta.Y >= 90 && mouseDelta.Sign().Y >= 0)

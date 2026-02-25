@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://bhohpd4xsdvov"
+path="res://.godot/imported/church.6.map-7397c2366696f7af86920f3b030ce3bb.tres"
+
+[deps]
+
+source_file="res://trenchbroom/maps/autosave/church.6.map"
+dest_files=["res://.godot/imported/church.6.map-7397c2366696f7af86920f3b030ce3bb.tres"]
+
+[params]
+

@@ -22,14 +22,15 @@ public partial class PlayerMove : CharacterBody3D
 	public override void _Ready() { }
 
 	[Export]
-	float walkSpeed = 620;
+	float walkSpeed = 600.00f;
 	[Export]
-	float runSpeed = 1400;
-	
+	float runSpeed = 1000.00f;
 	[Export]
-	float floorFriction = 0.89f;
+	float jumpHeight = 10.00f;
 	[Export]
-	float airFriction = 0.95f;
+	float frictionFactor = 0.90f;
+	[Export]
+	float slideFrictionFactor = 0.98f;
 	byte wallJumps = 0;
 
 
@@ -37,36 +38,41 @@ public partial class PlayerMove : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 movementInput = Input.GetVector("left", "right", "forward", "backward");
-		float frictionFactor = IsOnFloor() ? floorFriction : airFriction;
+		float moveStep = (sprinting ? runSpeed : walkSpeed) * (float)delta;
 		
+		float friction = frictionFactor * (IsOnFloor() && movementInput == Vector2.Zero ? 0.80f : 1.00f);
+		float slideFriction = slideFrictionFactor * (IsOnFloor() ? 0.80f : 1.00f);
+
         if (movementInput != Vector2.Zero) {
 			sprinting = Input.IsActionPressed("sprint");
-			float moveStep = (sprinting ? runSpeed : walkSpeed) * (float)delta;
-			Vector3 stupid = Velocity;
-			stupid.Y = 0;
+			Vector3 velocity2D = Velocity;
+			velocity2D.Y = 0.00f;
 			movementAxis = new Vector2(
-				movementAxis.X+(movementInput.X*moveStep*(1f/(stupid.Length()+5f))),
-				movementAxis.Y+(movementInput.Y*moveStep*(1f/(stupid.Length()+5f)))
+				movementAxis.X+(movementInput.X*moveStep*(1f/(velocity2D.Length()+5f))),
+				movementAxis.Y+(movementInput.Y*moveStep*(1f/(velocity2D.Length()+5f)))
 			);
 		}
 		else
 		{
 			sprinting = false;
 		}
-		movementAxis *= frictionFactor;
+		movementAxis *= friction;
+
+		if (movementAxis.LengthSquared() < 0.25f ) { movementAxis = Vector2.Zero; }
+
 		if (IsOnFloor())
 		{	
 			boingVec = Vector3.Zero;
 			wallJumps = 0;
 			if (Input.IsActionJustPressed("slide")) {
 				sliding = true;
-				slideVec = movementInput != Vector2.Zero ? new Vector3(movementInput.X, 0.0f, movementInput.Y) : new Vector3(0.0f, 0.0f, -1.0f);
+				slideVec = movementInput != Vector2.Zero ? new Vector3(movementInput.X, 0.00f, movementInput.Y) : new Vector3(0.00f, 0.00f, -1.00f);
 				slideVec *= (float)delta * 1000.0f;
 				slideAng = Rotation.Y;
 			}
 			if (Input.IsActionJustPressed("jump"))
 			{
-				boingVec.Y = 10.0f;
+				boingVec.Y = jumpHeight;
 			}
 		}
 		else
@@ -75,8 +81,8 @@ public partial class PlayerMove : CharacterBody3D
 			{
 				wallJumps++;
 				
-				boingVec = GetWallNormal() * (float)delta * (sprinting ? 1000.0f : 700.0f);
-				boingVec.Y = 1.0f;
+				boingVec = GetWallNormal().Normalized() * moveStep * 1.80f;
+				boingVec.Y = jumpHeight * 1.80f;
 			}
 			else
 			{
@@ -87,36 +93,38 @@ public partial class PlayerMove : CharacterBody3D
 		}
 		
 
-		if (GlobalPosition.Y < -75.0f) {
+		if (GlobalPosition.Y < -75.00f) {
 			GD.Print("You fell off the map, idiot");
 			GlobalPosition = Vector3.Zero;
 		}
 		if (Input.IsActionPressed("fly")) {
-			boingVec.Y = 16.0f;	
+			boingVec.Y = jumpHeight;	
 		}
         if (sliding && IsOnFloor() && Input.IsActionPressed("slide") && !Input.IsActionJustPressed("jump"))
         {
             Velocity = new Vector3(slideVec.X, boingVec.Y, slideVec.Z).Rotated(Vector3.Up, slideAng);
+			
         }
         else
         {
 			if (sliding && Input.IsActionJustPressed("jump")) {
-				boingVec.Y = 13.0f;
-				slideVec *= 3.0f;
+				boingVec.Y = jumpHeight * 1.50f;
+				slideVec *= 2.00f;
 			}
             sliding = false;
-			slideVec *= frictionFactor;
-            Velocity = new Vector3(movementAxis.X, 0.0f, movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
+			slideVec *= slideFriction;
+			if (slideVec.LengthSquared() < 0.25f) { slideVec = Vector3.Zero; }
+            Velocity = new Vector3(movementAxis.X, 0.00f, movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
             Velocity += boingVec;
-			Velocity += new Vector3(slideVec.X, 0.0f, slideVec.Z).Rotated(Vector3.Up, slideAng);
+			Velocity += new Vector3(slideVec.X, 0.00f, slideVec.Z).Rotated(Vector3.Up, slideAng);
         }
-		
 		MoveAndSlide();
+		if (GetRealVelocity().LengthSquared() < 250.00f && IsOnWall() && GetChild<Camera3D>(2).Position.Y == -0.60f) { sliding = false; }
 
 		if (Input.IsActionJustReleased("shoot"))
 		{
 			var col = rayCast.GetCollider();
-			col?.EmitSignal("take_damage", 0.1f);
+			col?.EmitSignal("take_damage", 0.10f);
 		}
 	}
 }

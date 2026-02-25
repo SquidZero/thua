@@ -21,30 +21,39 @@ public partial class PlayerMove : CharacterBody3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() { }
 
-		
-	float walkSpeed = 340;
-	float runSpeed = 620;
+	[Export]
+	float walkSpeed = 620;
+	[Export]
+	float runSpeed = 1400;
+	
+	[Export]
+	float floorFriction = 0.89f;
+	[Export]
+	float airFriction = 0.95f;
 	byte wallJumps = 0;
 
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		var movementInput = Input.GetVector("left", "right", "forward", "backward");
-		var frictionFactor =  IsOnFloor() ? 0.67f : 0.98f;
+		Vector2 movementInput = Input.GetVector("left", "right", "forward", "backward");
+		float frictionFactor = IsOnFloor() ? floorFriction : airFriction;
+		
         if (movementInput != Vector2.Zero) {
 			sprinting = Input.IsActionPressed("sprint");
-			var moveStep = (sprinting ? runSpeed : walkSpeed) * (float)delta;
+			float moveStep = (sprinting ? runSpeed : walkSpeed) * (float)delta;
+			Vector3 stupid = Velocity;
+			stupid.Y = 0;
 			movementAxis = new Vector2(
-				(float)Math.MinMagnitude(movementAxis.X+(movementInput.X*moveStep*(1f/(Velocity.Length()+5f))),movementInput.X*moveStep),
-				(float)Math.MinMagnitude(movementAxis.Y+(movementInput.Y*moveStep*(1f/(Velocity.Length()+5f))),movementInput.Y*moveStep)
+				movementAxis.X+(movementInput.X*moveStep*(1f/(stupid.Length()+5f))),
+				movementAxis.Y+(movementInput.Y*moveStep*(1f/(stupid.Length()+5f)))
 			);
 		}
 		else
 		{
-			movementAxis *= frictionFactor;
 			sprinting = false;
 		}
+		movementAxis *= frictionFactor;
 		if (IsOnFloor())
 		{	
 			boingVec = Vector3.Zero;
@@ -57,7 +66,7 @@ public partial class PlayerMove : CharacterBody3D
 			}
 			if (Input.IsActionJustPressed("jump"))
 			{
-				boingVec.Y = 6.0f;
+				boingVec.Y = 10.0f;
 			}
 		}
 		else
@@ -67,7 +76,7 @@ public partial class PlayerMove : CharacterBody3D
 				wallJumps++;
 				
 				boingVec = GetWallNormal() * (float)delta * (sprinting ? 1000.0f : 700.0f);
-				boingVec.Y = 8.0f;
+				boingVec.Y = 1.0f;
 			}
 			else
 			{
@@ -78,11 +87,13 @@ public partial class PlayerMove : CharacterBody3D
 		}
 		
 
-		if (GlobalPosition[1] < -75.0f) {
+		if (GlobalPosition.Y < -75.0f) {
 			GD.Print("You fell off the map, idiot");
 			GlobalPosition = Vector3.Zero;
 		}
-
+		if (Input.IsActionPressed("fly")) {
+			boingVec.Y = 16.0f;	
+		}
         if (sliding && IsOnFloor() && Input.IsActionPressed("slide") && !Input.IsActionJustPressed("jump"))
         {
             Velocity = new Vector3(slideVec.X, boingVec.Y, slideVec.Z).Rotated(Vector3.Up, slideAng);
@@ -99,6 +110,7 @@ public partial class PlayerMove : CharacterBody3D
             Velocity += boingVec;
 			Velocity += new Vector3(slideVec.X, 0.0f, slideVec.Z).Rotated(Vector3.Up, slideAng);
         }
+		
 		MoveAndSlide();
 
 		if (Input.IsActionJustReleased("shoot"))

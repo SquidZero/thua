@@ -61,7 +61,7 @@ public partial class PlayerMove : CharacterBody3D
 			if (Input.IsActionJustPressed("slide")) {
 				sliding = true;
 				slideVec = movementInput != Vector2.Zero ? new Vector3(movementInput.X, 0.0f, movementInput.Y) : new Vector3(0.0f, 0.0f, -1.0f);
-				slideVec *= (float)delta * 860.0f;
+				slideVec *= (float)delta * 1000.0f;
 				slideAng = Rotation.Y;
 			}
 			if (Input.IsActionJustPressed("jump"))
@@ -101,8 +101,8 @@ public partial class PlayerMove : CharacterBody3D
         else
         {
 			if (sliding && Input.IsActionJustPressed("jump")) {
-				boingVec.Y = 7.0f;
-				slideVec *= 1.8f;
+				boingVec.Y = 13.0f;
+				slideVec *= 3.0f;
 			}
             sliding = false;
 			slideVec *= frictionFactor;

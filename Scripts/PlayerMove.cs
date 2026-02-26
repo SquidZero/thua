@@ -22,9 +22,9 @@ public partial class PlayerMove : CharacterBody3D
 	public override void _Ready() { }
 
 	[Export]
-	float walkSpeed = 600.00f;
+	float walkSpeed = 768.00f;
 	[Export]
-	float runSpeed = 1000.00f;
+	float runSpeed = 1280.00f;
 	[Export]
 	float jumpHeight = 10.00f;
 	[Export]
@@ -47,10 +47,8 @@ public partial class PlayerMove : CharacterBody3D
 			sprinting = Input.IsActionPressed("sprint");
 			Vector3 velocity2D = Velocity;
 			velocity2D.Y = 0.00f;
-			movementAxis = new Vector2(
-				movementAxis.X+(movementInput.X*moveStep*(1f/(velocity2D.Length()+5f))),
-				movementAxis.Y+(movementInput.Y*moveStep*(1f/(velocity2D.Length()+5f)))
-			);
+			movementAxis.X += movementInput.X*moveStep/(velocity2D.Length()+5f);
+			movementAxis.Y += movementInput.Y*moveStep/(velocity2D.Length()+5f);
 		}
 		else
 		{
@@ -81,8 +79,8 @@ public partial class PlayerMove : CharacterBody3D
 			{
 				wallJumps++;
 				
-				boingVec = GetWallNormal().Normalized() * moveStep * 1.80f;
-				boingVec.Y = jumpHeight * 1.80f;
+				boingVec = GetWallNormal().Normalized() * moveStep * 1.60f;
+				boingVec.Y = jumpHeight * 1.40f;
 			}
 			else
 			{

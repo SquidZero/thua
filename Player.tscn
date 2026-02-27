@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://b5inp6kgabhum" path="res://Scripts/CameraLook.cs" id="2_kne1u"]
 [ext_resource type="ArrayMesh" uid="uid://bwxpmlgciyka" path="res://galaxii/THUA_RIFLE.obj" id="3_kne1u"]
 [ext_resource type="Shader" uid="uid://o3d5evvatq4u" path="res://galaxii/THUA_RIFLE.gdshader" id="4_e80uo"]
+[ext_resource type="Texture2D" uid="uid://lny254mjhcpn" path="res://crosshair.png" id="5_cxr5p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bdxqu"]
 
@@ -52,3 +53,21 @@ skeleton = NodePath("../..")
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1270399251]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, -0.5014111)
 target_position = Vector3(0, -9.223372e+18, 0)
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=445581496]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1153.0
+offset_top = -648.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=1402330131]
+layout_mode = 2
+texture = ExtResource("5_cxr5p")
+stretch_mode = 4

@@ -1,25 +1,25 @@
-using Godot;
 using System;
+using Godot;
 
 // testicles
 public partial class PlayerMove : CharacterBody3D
 {
-    [Export]
-    public Camera3D playerCamera;
+	[Export]
+	public Camera3D playerCamera;
 
-    [Export]
-    public RayCast3D rayCast;
-    Vector2 movementAxis = Vector2.Zero;
-    Vector3 boingVec = Vector3.Zero;
-    Vector3 slideVec = Vector3.Zero;
-    float slideAng = 0;
-    bool sprinting = false;
-    public bool sliding = false;
-    Vector3 from = Vector3.Zero;
-    Vector3 to = Vector3.Zero;
+	[Export]
+	public RayCast3D rayCast;
+	Vector2 movementAxis = Vector2.Zero;
+	Vector3 boingVec = Vector3.Zero;
+	Vector3 slideVec = Vector3.Zero;
+	float slideAng = 0;
+	bool sprinting = false;
+	public bool sliding = false;
+	Vector3 from = Vector3.Zero;
+	Vector3 to = Vector3.Zero;
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready() { }
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready() { }
 
 	[Export]
 	float walkSpeed = 768.00f;
@@ -33,8 +33,6 @@ public partial class PlayerMove : CharacterBody3D
 	float slideFrictionFactor = 0.98f;
 	byte wallJumps = 0;
 
-    [Export]
-    float floorFriction = 0.67f;
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)

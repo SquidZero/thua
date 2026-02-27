@@ -1203,8 +1203,6 @@ points = PackedVector3Array(-58, 15, -89, -58, 14, -89, -66, 15, -89, -66, 14, -
 
 [node name="CharacterBody3D" parent="." unique_id=402742391 instance=ExtResource("2_2rfw7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0208123, 0)
-walkSpeed = 80.0
-runSpeed = 120.0
 
 [node name="Ground" type="Marker3D" parent="." unique_id=1361125466]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23971558, 0, -73.46872)

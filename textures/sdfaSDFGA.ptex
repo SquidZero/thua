@@ -1,0 +1,175 @@
+{
+	"connections": [
+		{
+			"from": "bricks",
+			"from_port": 0,
+			"to": "invert",
+			"to_port": 0
+		},
+		{
+			"from": "invert",
+			"from_port": 0,
+			"to": "adjust_hsv_2",
+			"to_port": 0
+		},
+		{
+			"from": "perlin",
+			"from_port": 0,
+			"to": "adjust_hsv_3",
+			"to_port": 0
+		},
+		{
+			"from": "adjust_hsv_3",
+			"from_port": 0,
+			"to": "blend2",
+			"to_port": 0
+		},
+		{
+			"from": "adjust_hsv_2",
+			"from_port": 0,
+			"to": "blend2",
+			"to_port": 1
+		},
+		{
+			"from": "blend2",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 0
+		}
+	],
+	"label": "Graph",
+	"longdesc": "",
+	"name": "@Node@657",
+	"node_position": {
+		"x": 0.0,
+		"y": 0.0
+	},
+	"nodes": [
+		{
+			"export_last_target": "Godot/Godot 4 Standard",
+			"export_paths": {
+				"Godot/Godot 4 Standard": "/home/haddock/godot/thua/stonebrick2"
+			},
+			"name": "Material",
+			"node_position": {
+				"x": 416.925628662109,
+				"y": 1.5589724779129
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1.0,
+					"b": 1.0,
+					"g": 1.0,
+					"r": 1.0,
+					"type": "Color"
+				},
+				"ao": 1.0,
+				"depth_scale": 0.5,
+				"emission_energy": 1.0,
+				"flags_transparent": true,
+				"metallic": 0.0,
+				"normal": 1.0,
+				"roughness": 1.0,
+				"size": 11,
+				"sss": 1.0
+			},
+			"seed_int": 0,
+			"type": "material"
+		},
+		{
+			"name": "bricks",
+			"node_position": {
+				"x": -445.500030517578,
+				"y": -270.299987792969
+			},
+			"parameters": {
+				"bevel": 0.09,
+				"columns": 3.0,
+				"corner": 0.23,
+				"mortar": 0.02,
+				"pattern": 0,
+				"repeat": 1.0,
+				"round": 0.23,
+				"row_offset": 0.5,
+				"rows": 6.0
+			},
+			"seed_int": 0,
+			"type": "bricks3"
+		},
+		{
+			"name": "perlin",
+			"node_position": {
+				"x": -447.5,
+				"y": 215.800003051758
+			},
+			"parameters": {
+				"iterations": 8.0,
+				"persistence": 0.55,
+				"scale_x": 11.0,
+				"scale_y": 10.0
+			},
+			"seed_int": 0,
+			"type": "perlin"
+		},
+		{
+			"name": "invert",
+			"node_position": {
+				"x": -255.5,
+				"y": -173.0
+			},
+			"parameters": {
+
+			},
+			"seed_int": 0,
+			"type": "invert"
+		},
+		{
+			"name": "adjust_hsv_2",
+			"node_position": {
+				"x": -114.98014831543,
+				"y": -110.129486083984
+			},
+			"parameters": {
+				"hue": 0.0,
+				"saturation": 1.0,
+				"value": 0.431026204427083
+			},
+			"seed_int": 0,
+			"type": "adjust_hsv"
+		},
+		{
+			"name": "adjust_hsv_3",
+			"node_position": {
+				"x": -178.780151367188,
+				"y": 188.856307983398
+			},
+			"parameters": {
+				"hue": 0.0,
+				"saturation": 1.0,
+				"value": 0.559999593098958
+			},
+			"seed_int": 0,
+			"type": "adjust_hsv"
+		},
+		{
+			"generic_size": 1,
+			"name": "blend2",
+			"node_position": {
+				"x": 74.5185089111328,
+				"y": 41.5938568115234
+			},
+			"parameters": {
+				"amount1": 0.35,
+				"blend_type1": 0
+			},
+			"seed_int": 0,
+			"type": "blend2"
+		}
+	],
+	"parameters": {
+
+	},
+	"seed_int": 0,
+	"shortdesc": "",
+	"type": "graph"
+}

@@ -17,6 +17,7 @@ public partial class PlayerMove : CharacterBody3D
 	public bool sliding = false;
 	Vector3 from = Vector3.Zero;
 	Vector3 to = Vector3.Zero;
+	Vector3 resetyvec = new Vector3(0,1,0);
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() { }
@@ -75,6 +76,7 @@ public partial class PlayerMove : CharacterBody3D
 		}
 		else
 		{
+			boingVec.Y *= IsOnCeiling() ? 0 : 1;
 			if (IsOnWallOnly() && Input.IsActionJustPressed("jump") && wallJumps < 3)
 			{
 				wallJumps++;
@@ -116,6 +118,9 @@ public partial class PlayerMove : CharacterBody3D
             Velocity += boingVec;
 			Velocity += new Vector3(slideVec.X, 0.00f, slideVec.Z).Rotated(Vector3.Up, slideAng);
         }
+		// if (IsOnCeiling()) {
+		// 	boingVec = Vector3.Zero;
+		// }
 		MoveAndSlide();
 		if (GetRealVelocity().LengthSquared() < 250.00f && IsOnWall() && GetChild<Camera3D>(2).Position.Y == -0.60f) { sliding = false; }
 

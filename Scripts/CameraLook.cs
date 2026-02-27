@@ -5,6 +5,8 @@ public partial class CameraLook : Camera3D
 {
     Vector2 mouseDelta = Vector2.Zero;
     Vector3 startPos = Vector3.Zero;
+    Vector3 CLAMP_MIN = new Vector3(-Mathf.Pi/2f, 0, 0);
+    Vector3 CLAMP_MAX = new Vector3(Mathf.Pi/2f, Mathf.Tau, Mathf.Tau);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -37,7 +39,9 @@ public partial class CameraLook : Camera3D
             || (RotationDegrees.X + mouseDelta.Y <= -90 && mouseDelta.Sign().Y <= 0)
         )
             mouseDelta[1] = 0;
+        //Mathf.Clamp(mouseDelta.X, -5, 5);
         RotateX(mouseDelta.Y);
+        Rotation = Rotation.Clamp(CLAMP_MIN, CLAMP_MAX);
         ((Node3D)GetParent()).RotateY(mouseDelta.X);
         mouseDelta = Vector2.Zero;
         if (Input.IsActionJustPressed("unfocus_mouse"))

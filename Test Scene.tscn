@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://htkvq0lpkjca"]
 
-[ext_resource type="PackedScene" path="res://Player.tscn" id="2_2rfw7"]
+[ext_resource type="PackedScene" uid="uid://hdk2awek8124" path="res://Player.tscn" id="2_2rfw7"]
 [ext_resource type="Material" path="res://placeholdermaterial.tres" id="3_2rfw7"]
 [ext_resource type="Script" uid="uid://cks8lfspjo7cy" path="res://Scripts/Enemy/Enemy.cs" id="3_bwqk1"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="5_7r35v"]
@@ -1399,7 +1399,6 @@ transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 7.69
 script = ExtResource("5_7r35v")
 local_map_file = "uid://caj8py8il1s68"
 map_settings = ExtResource("6_1h1pd")
-metadata/_custom_type_script = "uid://cwu5cf7a0awcd"
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="churchmap" unique_id=1451239544]
 collision_mask = 0

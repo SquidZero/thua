@@ -30,6 +30,7 @@ public partial class PlayerMove : CharacterBody3D
     [Export]
     float airFriction = 0.98f;
 
+    [Export] float jumpHeight = 6.0f;
     [Export]
     float runSpeed = 620;
     byte wallJumps = 0;
@@ -40,12 +41,11 @@ public partial class PlayerMove : CharacterBody3D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(double delta)
     {
-        float friction = IsOnFloor() ? floorFriction : airFriction;
+        float frictionFactor = IsOnFloor() ? floorFriction : airFriction;
         if (Math.MaxMagnitude(Math.Abs(movementInput.X), Math.Abs(movementInput.Y)) < 0.25d)
             movementInput = Vector2.Zero;
         movementInput *= 0.85f;
         movementInput += Input.GetVector("left", "right", "forward", "backward");
-        var frictionFactor = IsOnFloor() ? 0.67f : 0.98f;
         if (movementInput != Vector2.Zero)
         {
             sprinting = Input.IsActionPressed("sprint");
@@ -90,7 +90,7 @@ public partial class PlayerMove : CharacterBody3D
             }
             if (Input.IsActionPressed("jump"))
             {
-                boingVec.Y = 6.0f;
+                boingVec.Y = jumpHeight;
             }
         }
         else
@@ -100,7 +100,7 @@ public partial class PlayerMove : CharacterBody3D
                 wallJumps++;
 
                 boingVec = GetWallNormal() * (float)delta * (sprinting ? 1000.0f : 700.0f);
-                boingVec.Y = 8.0f;
+                boingVec.Y = 1.4f*jumpHeight;
             }
             else
             {
@@ -132,7 +132,7 @@ public partial class PlayerMove : CharacterBody3D
         {
             if (sliding && Input.IsActionPressed("jump"))
             {
-                boingVec.Y = 7.0f;
+                boingVec.Y = jumpHeight*1.5f;
                 slideVec *= 1.8f;
             }
             sliding = false;

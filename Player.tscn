@@ -5,6 +5,7 @@
 [ext_resource type="ArrayMesh" uid="uid://bwxpmlgciyka" path="res://galaxii/THUA_RIFLE.obj" id="3_kne1u"]
 [ext_resource type="Shader" uid="uid://o3d5evvatq4u" path="res://galaxii/THUA_RIFLE.gdshader" id="4_e80uo"]
 [ext_resource type="Texture2D" uid="uid://lny254mjhcpn" path="res://crosshair.png" id="5_cxr5p"]
+[ext_resource type="Script" uid="uid://bf4eiau0no2lw" path="res://Grapple.cs" id="6_tdg3f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bdxqu"]
 
@@ -14,42 +15,59 @@
 render_priority = 0
 shader = ExtResource("4_e80uo")
 
-[node name="CharacterBody3D" type="CharacterBody3D" unique_id=402742391 node_paths=PackedStringArray("playerCamera", "rayCast")]
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_tdg3f"]
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.23263788, 1.9059777e-05, 0.92544085, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tdg3f"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dtqjt"]
+albedo_color = Color(0.02745098, 0, 1, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=402742391 node_paths=PackedStringArray("playerCamera", "rayCast", "grapple") groups=["player"]]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-wall_min_slide_angle = 1.7418386
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 1.1693707
 script = ExtResource("1_kpjcp")
 playerCamera = NodePath("Camera3D")
 rayCast = NodePath("Camera3D/RayCast3D")
+grapple = NodePath("Node3D")
+runSpeed = 2150.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1733904440]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1733904440 groups=["player"]]
 shape = SubResource("CapsuleShape3D_bdxqu")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=904842829]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=904842829 groups=["player"]]
 mesh = SubResource("CapsuleMesh_jjve1")
 skeleton = NodePath("")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=263050439]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=263050439 groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 current = true
 fov = 90.0
 near = 0.001
 script = ExtResource("2_kne1u")
 
-[node name="Gun" type="MeshInstance3D" parent="Camera3D" unique_id=1068649233]
+[node name="Gun" type="MeshInstance3D" parent="Camera3D" unique_id=1068649233 groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.28794274, -0.22743714, -0.62183386)
 material_override = SubResource("ShaderMaterial_e80uo")
 mesh = ExtResource("3_kne1u")
 skeleton = NodePath("../..")
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1270399251]
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D" unique_id=1270399251 groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, -0.5014111)
 target_position = Vector3(0, -9.223372e+18, 0)
+hit_from_inside = true
+collide_with_areas = true
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=445581496]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=445581496 groups=["player"]]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -61,8 +79,39 @@ offset_right = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=1402330131]
 layout_mode = 2
 texture = ExtResource("5_cxr5p")
 stretch_mode = 4
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1598322944 node_paths=PackedStringArray("debugBox", "velbox", "mesh", "velLabel") groups=["player"]]
+top_level = true
+script = ExtResource("6_tdg3f")
+debugBox = NodePath("CSGBox3D")
+velbox = NodePath("Velpoint")
+mesh = NodePath("MeshInstance3D")
+lineMat = SubResource("ORMMaterial3D_tdg3f")
+velLabel = NodePath("Velpoint/Label3D")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D" unique_id=487834714 groups=["player"]]
+auto_translate_mode = 2
+top_level = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D" unique_id=121092966 groups=["player"]]
+auto_translate_mode = 1
+visible = false
+size = Vector3(0.2578125, 0.05810547, 3.0166016)
+material = SubResource("StandardMaterial3D_tdg3f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D" unique_id=1933265226 groups=["player"]]
+top_level = true
+
+[node name="Velpoint" type="CSGBox3D" parent="Node3D" unique_id=633635594 groups=["player"]]
+size = Vector3(0.6, 0.6, 0.6)
+material = SubResource("StandardMaterial3D_dtqjt")
+
+[node name="Label3D" type="Label3D" parent="Node3D/Velpoint" unique_id=1862747914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+pixel_size = 0.01

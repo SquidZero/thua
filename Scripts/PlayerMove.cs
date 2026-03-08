@@ -17,7 +17,8 @@ public partial class PlayerMove : CharacterBody3D
 	public bool sliding = false;
 	Vector3 from = Vector3.Zero;
 	Vector3 to = Vector3.Zero;
-	Vector3 resetyvec = new Vector3(0,1,0);
+	public Vector3 a_c = Vector3.Zero;
+	[Export] Grapple grapple;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() { }
@@ -25,7 +26,7 @@ public partial class PlayerMove : CharacterBody3D
 	[Export]
 	float walkSpeed = 768.00f;
 	[Export]
-	float runSpeed = 1280.00f;
+	public float runSpeed = 1280.00f;
 	[Export]
 	float jumpHeight = 10.00f;
 	[Export]
@@ -114,13 +115,17 @@ public partial class PlayerMove : CharacterBody3D
             sliding = false;
 			slideVec *= slideFriction;
 			if (slideVec.LengthSquared() < 0.25f) { slideVec = Vector3.Zero; }
-            Velocity = new Vector3(movementAxis.X, 0.00f, movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
+			if (grapple.swinging) { 
+				Velocity = new Vector3(movementAxis.X, 0.00f, movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
+				Velocity += a_c * (float)delta;
+				//Velocity *= new Vector3(1,0,1); // note: a_c contains this.Velocity
+			} else
+			{
+	            Velocity = new Vector3(movementAxis.X, 0.00f, movementAxis.Y).Rotated(Vector3.Up, Rotation.Y);
+			}
             Velocity += boingVec;
 			Velocity += new Vector3(slideVec.X, 0.00f, slideVec.Z).Rotated(Vector3.Up, slideAng);
         }
-		// if (IsOnCeiling()) {
-		// 	boingVec = Vector3.Zero;
-		// }
 		MoveAndSlide();
 		if (GetRealVelocity().LengthSquared() < 250.00f && IsOnWall() && GetChild<Camera3D>(2).Position.Y == -0.60f) { sliding = false; }
 

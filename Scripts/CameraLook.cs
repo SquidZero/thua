@@ -7,6 +7,7 @@ public partial class CameraLook : Camera3D
     Vector3 startPos = Vector3.Zero;
     Vector3 CLAMP_MIN = new Vector3(-Mathf.Pi/2f, 0, 0);
     Vector3 CLAMP_MAX = new Vector3(Mathf.Pi/2f, Mathf.Tau, Mathf.Tau);
+    public bool dontAffectPlayerTransform = false;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -40,9 +41,16 @@ public partial class CameraLook : Camera3D
         )
             mouseDelta[1] = 0;
         //Mathf.Clamp(mouseDelta.X, -5, 5);
-        RotateX(mouseDelta.Y);
-        Rotation = Rotation.Clamp(CLAMP_MIN, CLAMP_MAX);
-        ((Node3D)GetParent()).RotateY(mouseDelta.X);
+        // if (dontAffectPlayerTransform)
+        // {
+        //     GlobalRotation = new Vector3(GlobalRotation.X + mouseDelta.Y, GlobalRotation.Y + mouseDelta.X, GlobalRotation.Z);
+        // }
+        // else {
+            ((Node3D)GetParent()).RotateY(mouseDelta.X);
+            RotateX(mouseDelta.Y);
+            Rotation = Rotation.Clamp(CLAMP_MIN, CLAMP_MAX);
+            //GlobalRotation *= new Vector3(1,1,0);
+        // }
         mouseDelta = Vector2.Zero;
         if (Input.IsActionJustPressed("unfocus_mouse"))
         {
